@@ -1,3 +1,3 @@
 function printInventory(tags) {
-    
+
 }
