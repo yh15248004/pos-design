@@ -21,7 +21,7 @@ describe('Cart', function() {
                     price: 3,
                     util: '瓶'
                     }
-             }
+                 }
             ]);
         });
 
