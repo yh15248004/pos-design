@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var Cart = require('./cart');
+
 function ItemFactory() {
 }
 
