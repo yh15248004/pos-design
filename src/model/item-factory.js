@@ -4,7 +4,7 @@ function ItemFactory() {
 }
 
 ItemFactory.createCartItem = function(countItems) {
-    
+
     var cart = new Cart();
     _.forEach(countItems, function(countItem) {
         cart.addCartItem(countItem);
