@@ -3,9 +3,8 @@ var Cart = require('./cart');
 function ItemFactory() {
 }
 
-ItemFactory.createCartItem = function(countItems) {
+ItemFactory.createCartItem = function(cart, countItems) {
 
-    var cart = new Cart();
     _.forEach(countItems, function(countItem) {
         cart.addCartItem(countItem);
     });
