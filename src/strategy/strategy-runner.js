@@ -4,7 +4,6 @@ var StrategyThree = require('./strategy-three');
 var StrategyFour = require('./strategy-four');
 var NoStrategy = require('./no-strategy');
 
-
 function StrategyRunner() {
 }
 
