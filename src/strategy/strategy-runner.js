@@ -8,7 +8,7 @@ function StrategyRunner() {
 }
 
 StrategyRunner.getStrategy = function(strategyType, cartItems) {
-    var result = new NoStrategy(cartItems);
+    var result = '';
 
     if(strategyType === 1) {
         result = new StrategyOne(cartItems);
