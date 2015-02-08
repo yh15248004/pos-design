@@ -8,7 +8,7 @@ describe('StrategyRunner', function() {
             var strategyType = 1;
             var cartItems = '111';
             var result = StrategyRunner.getStrategy(strategyType, cartItems);
-            expect(result.cartItems).toBe(111);
+            expect(result).toEqual({cartItems: '111'});
         });
 
     });
