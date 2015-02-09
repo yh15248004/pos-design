@@ -1,7 +1,6 @@
 var Strategy = require('./strategy');
 
-function StrategyTwo(cartItems) {
-    Strategy.call(this, cartItems);
+function StrategyTwo() {
 }
 StrategyTwo.prototype = Object.create(Strategy.prototype);
 StrategyTwo.prototype.constructor = StrategyTwo;
