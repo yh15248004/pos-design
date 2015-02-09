@@ -1,7 +1,7 @@
-function ItemDiscount(name, discount, subtotal) {
-    this.name = name;
+function ItemDiscount(discount, subtotal, name) {
     this.discount = discount;
     this.subtotal = subtotal;
+    this.name = name;
 }
 
 ItemDiscount.prototype.buildPromotionName = function() {
