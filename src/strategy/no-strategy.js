@@ -1,4 +1,3 @@
-function NoStrategy(cartItems) {
-    this.cartItems = cartItems;
+function NoStrategy() {
 }
 module.exports = NoStrategy;
