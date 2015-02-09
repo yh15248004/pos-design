@@ -11,8 +11,4 @@ BrandDiscount.prototype.buildPromotionName = function() {
     return this.brand + '品牌打折';
 };
 
-BrandDiscount.prototype.getPromotionMoney = function() {
-    return 1 * (this.subtotal * (1 - this.discount)).toFixed(2);
-};
-
 module.exports = BrandDiscount;
