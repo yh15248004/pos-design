@@ -9,7 +9,7 @@ ItemDiscount.prototype.buildPromotionName = function() {
 };
 
 ItemDiscount.prototype.getPromotionMoney = function() {
-    return this.subtotal * (1 - this.discount).toFixed(2);
+    return 1 * (this.subtotal * (1 - this.discount)).toFixed(2);
 };
 
 module.exports = ItemDiscount;
