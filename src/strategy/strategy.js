@@ -1,4 +1,3 @@
-function Strategy(cartItems) {
-    this.cartItems = cartItems;
+function Strategy() {
 }
 module.exports = Strategy;
