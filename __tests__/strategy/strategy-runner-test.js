@@ -2,7 +2,7 @@ jest.autoMockOff();
 
 describe('StrategyRunner', function() {
     var StrategyRunner = require('../../src/strategy/strategy-runner');
-    describe('.getStrategy()', function() {
+    /*describe('.getStrategy()', function() {
 
         it('should return correct strategy', function() {
             var strategyType = 1;
@@ -11,6 +11,6 @@ describe('StrategyRunner', function() {
             expect(result).toEqual({cartItems: '111'});
         });
 
-    });
+    });*/
 
 });
