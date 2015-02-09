@@ -1,4 +1,5 @@
 jest.dontMock('../../src/promotion/item-discount');
+jest.dontMock('../../src/promotion/discount');
 
 describe('ItemDiscount', function() {
 
