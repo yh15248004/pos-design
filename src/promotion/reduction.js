@@ -9,7 +9,7 @@ Reduction.prototype.buildPromotionName = function() {
 };
 
 Reduction.prototype.getPromotionMoney = function() {
-    return this.subtotal - Math.floor(this.subtotal/this.reachPoint) * this.reduceMoney;
+    return Math.floor(this.subtotal/this.reachPoint) * this.reduceMoney;
 };
 
 module.exports = Reduction;
