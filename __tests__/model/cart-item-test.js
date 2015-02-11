@@ -24,4 +24,18 @@ describe('CartItem', function() {
         });
     });
 
+    describe('#getPrice()', function() {
+        it('should return correct Price', function() {
+            var result = cartItem.getPrice();
+            expect(result).toBe(3);
+        });
+    });
+
+    describe('#getUnit()', function() {
+        it('should return correct unit', function() {
+            var result = cartItem.getUnit();
+            expect(result).toBe('瓶');
+        });
+    });
+
 });
