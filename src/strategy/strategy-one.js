@@ -30,9 +30,7 @@ StrategyOne.getItemDiscountInfo = function(cartItems) {
     var discountInfo = '';
     var discountItems = StrategyOne.findDiscountItems(cartItems);
     _.forEach(discountItems, function(discountItem) {
-        if(!StrategyOne.isSyndrome(discountItems, StrategyOne.brands())) {
-            discountInfo += StrategyOne.buildItemDiscountInfo(cartItems, discountItem);
-        }
+        discountInfo += StrategyOne.buildItemDiscountInfo(cartItems, discountItem);
     });
 
     return discountInfo;
@@ -46,6 +44,10 @@ StrategyOne.buildItemDiscountInfo = function(cartItems, discountItem) {
     });
 
     return result;
+};
+
+StrategyOne.isSyndrome = function(discountItems, brandItems) {
+
 };
 
 StrategyOne.findDiscountItems = function(cartItems) {
