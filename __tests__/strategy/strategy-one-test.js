@@ -55,7 +55,7 @@ describe('StrategyOne', function() {
 
         it('should return correct boolen', function() {
             var result = StrategyOne.isSyndrome(cartItem, brandItems);
-            expect(result).toBe(true);
+            expect(result).toBeTruthy();
         });
 
     });
