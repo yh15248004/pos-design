@@ -1,7 +1,7 @@
-function Item(barcode, name, util, price, brand) {
+function Item(barcode, name, unit, price, brand) {
     this.barcode = barcode;
     this.name = name;
-    this.util = util;
+    this.unit = unit;
     this.price = price || 0.00;
     this.brand = brand || '';
 }
