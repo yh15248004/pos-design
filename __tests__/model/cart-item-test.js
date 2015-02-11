@@ -17,4 +17,11 @@ describe('CartItem', function() {
         });
     });
 
+    describe('#getName()', function() {
+        it('should return correct name', function() {
+            var result = cartItem.getName();
+            expect(result).toBe('可口可乐350ml');
+        });
+    });
+
 });
