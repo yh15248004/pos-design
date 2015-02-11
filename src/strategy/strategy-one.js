@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var Strategy = require('./strategy');
+var DiscountHouse = require('../promotion/discount-house');
 
 function StrategyOne() {
 }
@@ -27,11 +28,24 @@ StrategyOne.brands =function() {
 
 StrategyOne.getItemDiscountInfo = function(cartItems) {
     var discountInfo = '';
-    var discountCartItem = StrategyOne.getDiscountItem(cartItems);
-    if(!StrategyOne.isSyndrome(discountCartItem, StrategyOne.brands())) {
+    var discountItems = StrategyOne.findDiscountItems(cartItems);
+    _.forEach(discountItems, function(discountItem) {
+        if(!StrategyOne.isSyndrome(discountItems, StrategyOne.brands())) {
 
-    }
+        }
+    });
+
     return discountInfo;
+};
+
+StrategyOne.findDiscountItems = function(cartItems) {
+    var discountItems = [];
+    _.forEach(cartItems, function(cartItem){
+        discountItems.push(_.find(StrategyOne.items(), function(discountItem){
+            return discountItem.name === cartItem.getName();
+        }));
+    });
+    return discountItems;
 };
 
 module.exports = StrategyOne;
