@@ -41,9 +41,9 @@ StrategyOne.getItemDiscountInfo = function(cartItems) {
 StrategyOne.findDiscountItems = function(cartItems) {
     var discountItems = [];
     _.forEach(cartItems, function(cartItem){
-        discountItems.push(_.find(StrategyOne.items(), function(discountItem){
-            return discountItem.name === cartItem.getName();
-        }));
+        var discountItem = _.find(StrategyOne.items(), function(discountItem){
+            return discountItem.name === cartItem.getName();});
+        if(!!discountItem) {discountItems.push(discountItem);}
     });
     return discountItems;
 };
