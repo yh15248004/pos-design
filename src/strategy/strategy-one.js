@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var Strategy = require('./strategy');
 var DiscountHouse = require('../promotion/discount-house');
+var ItemDiscount = require('../promotion/item-discount');
 
 function StrategyOne() {
 }
@@ -44,6 +45,7 @@ StrategyOne.buildItemDiscountInfo = function(cartItems, discountItem) {
     });
 
     if(!StrategyOne.isSyndrome(cartItem, StrategyOne.brands())) {
+        var itemDiscount = new ItemDiscount(discountItem.rate, cartItem.getSubtotal(), discountItem.name);
 
     }
 
