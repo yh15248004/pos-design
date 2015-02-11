@@ -36,4 +36,12 @@ describe('StrategyOne', function() {
 
     });
 
+    describe('.isSyndrome()', function() {
+
+        it('should return correct boolen', function() {
+            
+        });
+
+    });
+
 });
