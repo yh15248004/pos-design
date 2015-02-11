@@ -38,4 +38,11 @@ describe('CartItem', function() {
         });
     });
 
+    describe('#getSubtotal()', function() {
+        it('should return correct price', function() {
+            var result = cartItem.getSubtotal();
+            expect(result).toBe(60);
+        });
+    });
+
 });
