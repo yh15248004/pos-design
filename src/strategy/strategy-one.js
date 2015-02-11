@@ -43,11 +43,18 @@ StrategyOne.buildItemDiscountInfo = function(cartItems, discountItem) {
         return cartItem.getName() === discountItem.name;
     });
 
+    if(!StrategyOne.isSyndrome(cartItem, StrategyOne.brands())) {
+
+    }
+
     return result;
 };
 
-StrategyOne.isSyndrome = function(discountItems, brandItems) {
-
+StrategyOne.isSyndrome = function(cartItem, brandItems) {
+    var result = _.contains(brandItems, function(brandItem) {
+        return brandItem.name === cartItem.brand;
+    });
+    return result;
 };
 
 StrategyOne.findDiscountItems = function(cartItems) {
