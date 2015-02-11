@@ -19,4 +19,8 @@ CartItem.prototype.getUnit = function() {
     return this.item.unit;
 };
 
+CartItem.prototype.getSubtotal = function() {
+    return this.getPrice() * this.count;
+};
+
 module.exports = CartItem;
