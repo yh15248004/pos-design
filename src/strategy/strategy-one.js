@@ -31,20 +31,32 @@ StrategyOne.getItemDiscountInfo = function(cartItems) {
     var discountItems = StrategyOne.findDiscountItems(cartItems);
     _.forEach(discountItems, function(discountItem) {
         if(!StrategyOne.isSyndrome(discountItems, StrategyOne.brands())) {
-
+            discountInfo += StrategyOne.buildItemDiscountInfo(cartItems, discountItem);
         }
     });
 
     return discountInfo;
 };
 
+StrategyOne.buildItemDiscountInfo = function(cartItems, discountItem) {
+    var result = '';
+
+    var cartItem = _.find(cartItems, function(cartItem) {
+        return cartItem.getName() === discountItem.name;
+    });
+
+    return result;
+};
+
 StrategyOne.findDiscountItems = function(cartItems) {
     var discountItems = [];
+
     _.forEach(cartItems, function(cartItem){
         var discountItem = _.find(StrategyOne.items(), function(discountItem){
             return discountItem.name === cartItem.getName();});
         if(!!discountItem) {discountItems.push(discountItem);}
     });
+
     return discountItems;
 };
 
