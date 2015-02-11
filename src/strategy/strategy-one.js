@@ -51,10 +51,9 @@ StrategyOne.buildItemDiscountInfo = function(cartItems, discountItem) {
 };
 
 StrategyOne.isSyndrome = function(cartItem, brandItems) {
-    var result = _.contains(brandItems, function(brandItem) {
+    return _.any(brandItems, function(brandItem) {
         return brandItem.name === cartItem.getBrand();
     });
-    return result;
 };
 
 StrategyOne.findDiscountItems = function(cartItems) {
