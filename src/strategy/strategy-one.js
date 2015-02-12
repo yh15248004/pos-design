@@ -2,6 +2,7 @@ var _ = require('lodash');
 var Strategy = require('./strategy');
 var DiscountHouse = require('../promotion/discount-house');
 var ItemDiscount = require('../promotion/item-discount');
+var BrandDiscount = require('../promotion/brand-discount');
 
 function StrategyOne() {
 }
@@ -27,9 +28,30 @@ StrategyOne.getBrandDiscountInfo = function(cartItems) {
     var discountInfo = '';
     var discountBrands = Strategy.findDiscountBrands(cartItems, StrategyOne.brands());
     _.forEach(discountBrands, function(discountBrand) {
-
+        discountInfo += StrategyOne.buildBrandDiscountInfo(cartItems, discountBrand);
     });
     return discountInfo;
+};
+
+
+StrategyOne.buildBrandDiscountInfo = function(cartItems, discountBrand) {
+    var result = '';
+
+    var newCartItems = _.filter(cartItems, function(cartItem) {
+        return cartItem.getBrand() === discountBrand.name;
+    });
+
+    var totalMoney = _.reduce(newCartItems, function(subtotal, newCartItem) {
+        return subtotal + newCartItem.getSubtotal();
+    },0);
+
+    var brandDiscount = new BrandDiscount(discountBrand.rate, totalMoney, discountBrand.name);
+    _.forEach(newCartItems, function(newCartItem) {
+        newCartItem.promotionMoney = brandDiscount.getPromotionMoney() / newCartItems.length;
+    });
+    result += Strategy.buildInfo(brandDiscount.buildPromotionName(), brandDiscount.getPromotionMoney());
+
+    return result;
 };
 
 StrategyOne.getItemDiscountInfo = function(cartItems) {

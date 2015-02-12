@@ -32,4 +32,10 @@ Strategy.findDiscountBrands = function(cartItems, discountBrands) {
 
 };
 
+Strategy.getBrandSubtotal = function(cartItems) {
+    return _.reduce(cartItems, function(subtotal, cartItem) {
+        return subtotal + cartItem.getSubtotal();
+    },0);
+};
+
 module.exports = Strategy;
