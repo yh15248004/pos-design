@@ -46,7 +46,9 @@ StrategyOne.buildItemDiscountInfo = function(cartItems, discountItem) {
 
     if(!StrategyOne.isSyndrome(cartItem, StrategyOne.brands())) {
         var itemDiscount = new ItemDiscount(discountItem.rate, cartItem.getSubtotal(), discountItem.name);
-
+        itemDiscount.buildPromotionName();
+        itemDiscount.getPromotionMoney();
+        cartItem.promotionMoney = itemDiscount.getPromotionMoney();
     }
 
     return result;
