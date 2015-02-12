@@ -48,11 +48,11 @@ describe('Strategy', function() {
 
     });
 
-    describe('.getBrandSubtotal()', function() {
+    describe('.getNoPromotionSubtotal()', function() {
         var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
             new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
         it('should return correct money', function() {
-            var result = Strategy.getBrandSubtotal(cartItems);
+            var result = Strategy.getNoPromotionSubtotal(cartItems);
             expect(result).toBe(108);
         });
     });

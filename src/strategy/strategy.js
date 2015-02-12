@@ -33,7 +33,7 @@ Strategy.findDiscountBrands = function(cartItems, discountBrands) {
 
 };
 
-Strategy.getBrandSubtotal = function(cartItems) {
+Strategy.getNoPromotionSubtotal = function(cartItems) {
     return _.reduce(cartItems, function(subtotal, cartItem) {
         return subtotal + cartItem.getSubtotal();
     },0);

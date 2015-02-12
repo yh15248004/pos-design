@@ -3,6 +3,7 @@ var Strategy = require('./strategy');
 var DiscountHouse = require('../promotion/discount-house');
 var ItemDiscount = require('../promotion/item-discount');
 var BrandDiscount = require('../promotion/brand-discount');
+var WholeReduction = require('../promotion/whole-reduction');
 
 function StrategyOne() {
 }
@@ -11,7 +12,10 @@ StrategyOne.prototype.constructor = StrategyOne;
 
 StrategyOne.prototype.getPromotionInfo = function(cartItems) {
     var promotionInfo = '';
+
     promotionInfo += StrategyOne.getItemDiscountInfo(cartItems);
+    promotionInfo += StrategyOne.getBrandDiscountInfo(cartItems);
+    promotionInfo += StrategyOne.getWholeReductionInfo(cartItems);
 
     return promotionInfo;
 };
@@ -24,6 +28,19 @@ StrategyOne.brands =function() {
     return [new DiscountHouse('可口可乐', 0.9)];
 };
 
+StrategyOne.getWholeReductionInfo = function(cartItems) {
+    var newCartItems = StrategyOne.findWholeReductionCartItem(cartItems, '康师傅方便面');
+    var totalMoney = Strategy.getNoPromotionSubtotal(newCartItems);
+    var wholeReduction = new WholeReduction(100, 3, totalMoney);
+    return Strategy.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
+};
+
+StrategyOne.findWholeReductionCartItem = function(cartItems, name) {
+    return _.filter(cartItems, function(cartItem) {
+        return cartItem.getName() !== name && cartItem.promotionMoney === 0;
+    });
+};
+
 StrategyOne.getBrandDiscountInfo = function(cartItems) {
     var discountInfo = '';
     var discountBrands = Strategy.findDiscountBrands(cartItems, StrategyOne.brands());
@@ -33,14 +50,13 @@ StrategyOne.getBrandDiscountInfo = function(cartItems) {
     return discountInfo;
 };
 
-
 StrategyOne.buildBrandDiscountInfo = function(cartItems, discountBrand) {
 
     var newCartItems = _.filter(cartItems, function(cartItem) {
         return cartItem.getBrand() === discountBrand.name;
     });
 
-    var totalMoney = Strategy.getBrandSubtotal(newCartItems);
+    var totalMoney = Strategy.getNoPromotionSubtotal(newCartItems);
 
     var brandDiscount = new BrandDiscount(discountBrand.rate, totalMoney, discountBrand.name);
     Strategy.setBrandPromotionMoney(newCartItems, brandDiscount.getPromotionMoney());
