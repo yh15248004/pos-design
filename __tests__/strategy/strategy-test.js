@@ -57,6 +57,14 @@ describe('Strategy', function() {
         });
     });
 
-
+    describe('.setBrandPromotionMoney()', function() {
+        var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
+            new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
+        var money = 10.8;
+        it('should return correct money', function() {
+            Strategy.setBrandPromotionMoney(cartItems, money);
+            expect(cartItems[0].promotionMoney).toBe(5.4);
+        });
+    });
 
 });
