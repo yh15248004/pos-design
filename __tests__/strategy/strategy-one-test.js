@@ -7,16 +7,18 @@ describe('StrategyOne', function() {
     var CartItem = require('../../src/model/cart-item');
     var DiscountHouse = require('../../src/promotion/discount-house');
 
-    //describe('.getPromotionInfo()', function() {
-    //    var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
-    //        new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12),
-    //        new CartItem(new Item('ITEM000005', '康师傅方便面', '袋', 4.50, '康师傅'), 20),
-    //        new CartItem(new Item('ITEM000006', '羽毛球', '个', 1.00, ''), 20)];
-    //    it('should return correct string', function() {
-    //
-    //    });
-    //
-    //});
+    describe('.getPromotionInfo()', function() {
+        var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 100),
+            new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12),
+            new CartItem(new Item('ITEM000005', '康师傅方便面', '袋', 4.50, '康师傅'), 20),
+            new CartItem(new Item('ITEM000006', '羽毛球', '个', 1.00, ''), 20)];
+        var strategyOne = new StrategyOne();
+        it('should return correct string', function() {
+            var result = strategyOne.getPromotionInfo(cartItems);
+            expect(result).toBe('名称：可口可乐品牌打折，金额：34.80元');
+        });
+
+    });
 
     describe('.getWholeReductionInfo()', function() {
         var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 100),
