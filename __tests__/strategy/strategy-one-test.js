@@ -15,7 +15,7 @@ describe('StrategyOne', function() {
         var strategyOne = new StrategyOne();
         it('should return correct string', function() {
             var result = strategyOne.getPromotionInfo(cartItems);
-            expect(result).toBe('名称：可口可乐品牌打折，金额：34.80元');
+            expect(result).toBe('名称：可口可乐品牌打折，金额：34.80元\n');
         });
 
     });
