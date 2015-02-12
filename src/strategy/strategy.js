@@ -28,6 +28,7 @@ Strategy.findDiscountBrands = function(cartItems, discountBrands) {
         if(!!discountBrand) {result.push(discountBrand);}
     });
 
+    result = _.intersection(result);
     return result;
 
 };
