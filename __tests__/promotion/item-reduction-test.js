@@ -16,7 +16,7 @@ describe('ItemReduction', function() {
     describe('#getPromotionMoney()', function() {
         it('should return correct number', function() {
             var result = reduction.getPromotionMoney();
-            expect(result).toEqual('25.00');
+            expect(result).toEqual(25);
         });
     });
 

@@ -7,6 +7,29 @@ describe('StrategyOne', function() {
     var CartItem = require('../../src/model/cart-item');
     var DiscountHouse = require('../../src/promotion/discount-house');
 
+    //describe('.getPromotionInfo()', function() {
+    //    var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
+    //        new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12),
+    //        new CartItem(new Item('ITEM000005', '康师傅方便面', '袋', 4.50, '康师傅'), 20),
+    //        new CartItem(new Item('ITEM000006', '羽毛球', '个', 1.00, ''), 20)];
+    //    it('should return correct string', function() {
+    //
+    //    });
+    //
+    //});
+
+    describe('.getWholeReductionInfo()', function() {
+        var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 100),
+            new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 10),
+            new CartItem(new Item('ITEM000005', '康师傅方便面', '袋', 4.50, '康师傅'), 20),
+            new CartItem(new Item('ITEM000006', '羽毛球', '个', 1.00, ''), 20)];
+        it('should return correct string', function() {
+            var result = StrategyOne.getWholeReductionInfo(cartItems);
+            expect(result).toBe('名称：满100减3，金额：9.00元\n');
+        });
+
+    });
+
     describe('.items()', function() {
         var result = StrategyOne.items();
 
@@ -63,7 +86,7 @@ describe('StrategyOne', function() {
 
         it('should return correct string', function() {
             var result = StrategyOne.buildBrandDiscountInfo(cartItems, discountBrand);
-            expect(result).toBe('名称：可口可乐品牌打折，金额：10.80元');
+            expect(result).toBe('名称：可口可乐品牌打折，金额：10.80元\n');
         });
 
     });
@@ -85,7 +108,7 @@ describe('StrategyOne', function() {
 
         it('should return correct string', function() {
             var result = StrategyOne.getBrandDiscountInfo(cartItems);
-            expect(result).toBe('名称：可口可乐品牌打折，金额：10.80元');
+            expect(result).toBe('名称：可口可乐品牌打折，金额：10.80元\n');
         });
 
     });
@@ -100,6 +123,5 @@ describe('StrategyOne', function() {
             expect(result.length).toBe(3);
         });
     });
-
 
 });
