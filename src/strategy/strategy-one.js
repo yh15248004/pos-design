@@ -25,7 +25,10 @@ StrategyOne.brands =function() {
 
 StrategyOne.getBrandDiscountInfo = function(cartItems) {
     var discountInfo = '';
+    var discountBrands = Strategy.findDiscountBrands(cartItems, StrategyOne.brands());
+    _.forEach(discountBrands, function(discountBrand) {
 
+    });
     return discountInfo;
 };
 
