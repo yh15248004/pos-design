@@ -89,5 +89,17 @@ describe('StrategyOne', function() {
         });
 
     });
+    describe('.findWholeReductionCartItem()', function() {
+        var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
+            new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12),
+            new CartItem(new Item('ITEM000005', '康师傅方便面', '袋', 4.50, '康师傅'), 20),
+            new CartItem(new Item('ITEM000006', '羽毛球', '个', 1.00, ''), 20)];
+        var name = '康师傅方便面';
+        it('should return correct string', function() {
+            var result = StrategyOne.findWholeReductionCartItem(cartItems, name);
+            expect(result.length).toBe(3);
+        });
+    });
+
 
 });
