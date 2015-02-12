@@ -56,6 +56,18 @@ describe('StrategyOne', function() {
 
     });
 
+    describe('.buildBrandDiscountInfo()', function() {
+        var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
+            new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
+        var discountBrand = StrategyOne.brands()[0];
+
+        it('should return correct string', function() {
+            var result = StrategyOne.buildBrandDiscountInfo(cartItems, discountBrand);
+            expect(result).toBe('名称：可口可乐品牌打折，金额：10.80元');
+        });
+
+    });
+
     describe('.getItemDiscountInfo()', function() {
         var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
             new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
@@ -66,6 +78,5 @@ describe('StrategyOne', function() {
         });
 
     });
-
 
 });
