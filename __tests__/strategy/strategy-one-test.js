@@ -60,4 +60,16 @@ describe('StrategyOne', function() {
 
     });
 
+    describe('.buildItemDiscountInfo()', function() {
+        var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
+            new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
+        var discountItem = StrategyOne.items()[0];
+
+        it('should return correct string', function() {
+            var result = StrategyOne.buildItemDiscountInfo(cartItems, discountItem);
+            expect(result).toBe('');
+        });
+
+    });
+
 });
