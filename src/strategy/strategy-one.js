@@ -29,10 +29,17 @@ StrategyOne.brands =function() {
 };
 
 StrategyOne.getWholeReductionInfo = function(cartItems) {
+    var result = '';
+
     var newCartItems = StrategyOne.findWholeReductionCartItem(cartItems, '康师傅方便面');
     var totalMoney = Strategy.getNoPromotionSubtotal(newCartItems);
     var wholeReduction = new WholeReduction(100, 3, totalMoney);
-    return Strategy.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
+
+    if(wholeReduction.getPromotionMoney() !==0) {
+        result = Strategy.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
+    }
+
+    return result;
 };
 
 StrategyOne.findWholeReductionCartItem = function(cartItems, name) {
