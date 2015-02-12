@@ -31,7 +31,7 @@ StrategyOne.getBrandDiscountInfo = function(cartItems) {
 
 StrategyOne.getItemDiscountInfo = function(cartItems) {
     var discountInfo = '';
-    var discountItems = StrategyOne.findDiscountItems(cartItems);
+    var discountItems = Strategy.findDiscountItems(cartItems, StrategyOne.items());
     _.forEach(discountItems, function(discountItem) {
         discountInfo += StrategyOne.buildItemDiscountInfo(cartItems, discountItem);
     });
@@ -59,18 +59,6 @@ StrategyOne.isSyndrome = function(cartItem, brandItems) {
     return _.any(brandItems, function(brandItem) {
         return brandItem.name === cartItem.getBrand();
     });
-};
-
-StrategyOne.findDiscountItems = function(cartItems, discountItems) {
-    var result = [];
-
-    _.forEach(cartItems, function(cartItem){
-        var discountItem = _.find(discountItems, function(discountItem){
-            return discountItem.name === cartItem.getName();});
-        if(!!discountItem) {result.push(discountItem);}
-    });
-
-    return result;
 };
 
 module.exports = StrategyOne;

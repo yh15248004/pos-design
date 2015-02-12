@@ -33,22 +33,6 @@ describe('StrategyOne', function() {
 
     });
 
-    describe('.findDiscountItems()', function() {
-        var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
-            new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
-
-        it('should return correct string', function() {
-            var result = StrategyOne.findDiscountItems(cartItems);
-            expect(result[0].name).toBe('可口可乐350ml');
-        });
-
-        it('should return correct num', function() {
-            var result = StrategyOne.findDiscountItems(cartItems);
-            expect(result[0].rate).toBe(0.95);
-        });
-
-    });
-
     describe('.isSyndrome()', function() {
         var cartItem = new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20);
         var brandItems = StrategyOne.brands();
