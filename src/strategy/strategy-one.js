@@ -10,11 +10,7 @@ StrategyOne.prototype.constructor = StrategyOne;
 
 StrategyOne.prototype.getPromotionInfo = function(cartItems) {
     var promotionInfo = '';
-    var discountCartItem = StrategyOne.getDiscountItem(cartItems);
-    var discountBrandCartItems = StrategyOne.getBrandCartItems(cartItems);
-    if(!StrategyOne.isSyndrome(discountCartItem, discountBrandCartItems)) {
-
-    }
+    promotionInfo += StrategyOne.getItemDiscountInfo(cartItems);
 
     return promotionInfo;
 };
@@ -25,6 +21,12 @@ StrategyOne.items =function() {
 
 StrategyOne.brands =function() {
     return [new DiscountHouse('可口可乐', 0.9)];
+};
+
+StrategyOne.getBrandDiscountInfo = function(cartItems) {
+    var discountInfo = '';
+
+    return discountInfo;
 };
 
 StrategyOne.getItemDiscountInfo = function(cartItems) {
@@ -59,16 +61,16 @@ StrategyOne.isSyndrome = function(cartItem, brandItems) {
     });
 };
 
-StrategyOne.findDiscountItems = function(cartItems) {
-    var discountItems = [];
+StrategyOne.findDiscountItems = function(cartItems, discountItems) {
+    var result = [];
 
     _.forEach(cartItems, function(cartItem){
-        var discountItem = _.find(StrategyOne.items(), function(discountItem){
+        var discountItem = _.find(discountItems, function(discountItem){
             return discountItem.name === cartItem.getName();});
-        if(!!discountItem) {discountItems.push(discountItem);}
+        if(!!discountItem) {result.push(discountItem);}
     });
 
-    return discountItems;
+    return result;
 };
 
 module.exports = StrategyOne;
