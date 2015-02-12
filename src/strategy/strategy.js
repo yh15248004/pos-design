@@ -38,4 +38,10 @@ Strategy.getBrandSubtotal = function(cartItems) {
     },0);
 };
 
+Strategy.setBrandPromotionMoney = function(cartItems, totalPromotionMoney) {
+    _.forEach(cartItems, function(cartItem) {
+        cartItem.promotionMoney = Math.floor(totalPromotionMoney / cartItems.length);
+    });
+};
+
 module.exports = Strategy;
