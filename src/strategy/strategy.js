@@ -19,4 +19,17 @@ Strategy.findDiscountItems = function(cartItems, discountItems) {
     return result;
 };
 
+Strategy.findDiscountBrands = function(cartItems, discountBrands) {
+    var result = [];
+
+    _.forEach(cartItems, function(cartItem){
+        var discountBrand = _.find(discountBrands, function(discountBrand){
+            return discountBrand.name === cartItem.getBrand();});
+        if(!!discountBrand) {result.push(discountBrand);}
+    });
+
+    return result;
+
+};
+
 module.exports = Strategy;
