@@ -6,7 +6,7 @@ describe('CartItem', function() {
     var Item = require('../../src/model/item');
     var CartItem = require('../../src/model/cart-item');
     var cartItem;
-    
+
     beforeEach(function() {
         cartItem = new CartItem(Item.all()[0], 20);
     });
