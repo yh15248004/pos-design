@@ -36,4 +36,17 @@ describe('Cart', function() {
 
     });
 
+    describe('#getCartItemsText()', function() {
+
+        it('should return correct string', function() {
+            cart.cartItems = cartItems;
+            var result = cart.getCartItemsText();
+            expect(result).toBe('名称：可口可乐350ml，数量：20瓶，单价：3.00(元)，小计：60.00(元)\n' +
+            '名称：可口可乐550ml，数量：12瓶，单价：4.00(元)，小计：48.00(元)\n' +
+            '名称：康师傅方便面，数量：20袋，单价：4.50(元)，小计：90.00(元)\n' +
+            '名称：羽毛球，数量：20个，单价：1.00(元)，小计：20.00(元)\n');
+        });
+
+    });
+
 });
