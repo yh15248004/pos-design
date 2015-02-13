@@ -49,4 +49,29 @@ describe('Cart', function() {
 
     });
 
+    describe('#getSummaryText()', function() {
+
+        var strategy = new StrategyOne();
+        it('should return correct string', function() {
+            cart.cartItems = cartItems;
+            cart.getPromotionText(strategy);
+            var result = cart.getSummaryText(strategy);
+            expect(result).toBe('总计：207.20(元)\n' +
+                                '节省：10.80(元)\n');
+
+        });
+
+    });
+
+    describe('#getTotalAmount()', function() {
+
+        it('should return correct num', function() {
+            cart.cartItems = cartItems;
+            var result = cart.getTotalAmount(20);
+            expect(result).toBe(198);
+
+        });
+
+    });
+
 });
