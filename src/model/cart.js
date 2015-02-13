@@ -25,4 +25,11 @@ Cart.prototype.getCartItemsText = function() {
     return cartItemsText;
 };
 
+Cart.prototype.getSummaryText = function(strategy) {
+    var summaryText = '';
+    summaryText += '总计：' + this.getTotalAmount(strategy).toFixed(2) + '(元)\n' +
+                   '节省：' + this.getSaveAmount(strategy).toFixed(2) + '(元)\n';
+    return summaryText;
+};
+
 module.exports = Cart;
