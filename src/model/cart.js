@@ -27,9 +27,17 @@ Cart.prototype.getCartItemsText = function() {
 
 Cart.prototype.getSummaryText = function(strategy) {
     var summaryText = '';
-    summaryText += '总计：' + this.getTotalAmount(strategy).toFixed(2) + '(元)\n' +
-                   '节省：' + this.getSaveAmount(strategy).toFixed(2) + '(元)\n';
+    summaryText += '总计：' + this.getTotalAmount(strategy.savingTotal).toFixed(2) + '(元)\n' +
+                   '节省：' +strategy.savingTotal.toFixed(2) + '(元)\n';
     return summaryText;
+};
+
+Cart.prototype.getTotalAmount = function(saveMoney) {
+
+    return _.reduce(this.cartItems, function(subtotal, cartItem) {
+        return subtotal + cartItem.getSubtotal();
+    },0) - saveMoney;
+
 };
 
 module.exports = Cart;
