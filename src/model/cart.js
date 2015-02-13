@@ -15,4 +15,9 @@ Cart.prototype.getPromotionText = function(strategy) {
     return strategy.getPromotionInfo(this.cartItems);
 };
 
+Cart.prototype.getCartItemsText = function() {
+    var cartItemsText = '';
+    return cartItemsText;
+};
+
 module.exports = Cart;
