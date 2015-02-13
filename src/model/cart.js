@@ -11,4 +11,8 @@ Cart.prototype.addCartItem = function(countItem) {
     this.cartItems.push(new CartItem(item, countItem[key]));
 };
 
+Cart.prototype.getPromotionText = function(strategy) {
+    return strategy.getPromotionInfo(this.cartItems);
+};
+
 module.exports = Cart;
