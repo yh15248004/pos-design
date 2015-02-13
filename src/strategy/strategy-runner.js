@@ -23,8 +23,4 @@ StrategyRunner.getStrategy = function(strategyType) {
     return result;
 };
 
-StrategyRunner.run = function(strategy, cartItems) {
-    
-};
-
 module.exports = StrategyRunner;
