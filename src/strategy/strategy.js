@@ -4,11 +4,11 @@ function Strategy() {
     this.savingTotal = 0;
 }
 
-Strategy.buildInfo = function(name, money) {
+Strategy.prototype.buildInfo = function(name, money) {
     return '名称：' + name + '，金额：' + money.toFixed(2) + '元\n';
 };
 
-Strategy.findDiscountItems = function(cartItems, discountItems) {
+Strategy.prototype.findDiscountItems = function(cartItems, discountItems) {
     var result = [];
 
     _.forEach(cartItems, function(cartItem){
@@ -20,7 +20,7 @@ Strategy.findDiscountItems = function(cartItems, discountItems) {
     return result;
 };
 
-Strategy.findDiscountBrands = function(cartItems, discountBrands) {
+Strategy.prototype.findDiscountBrands = function(cartItems, discountBrands) {
     var result = [];
 
     _.forEach(cartItems, function(cartItem){
@@ -34,15 +34,15 @@ Strategy.findDiscountBrands = function(cartItems, discountBrands) {
 
 };
 
-Strategy.getNoPromotionSubtotal = function(cartItems) {
+Strategy.prototype.getNoPromotionSubtotal = function(cartItems) {
     return _.reduce(cartItems, function(subtotal, cartItem) {
         return subtotal + cartItem.getSubtotal();
     },0);
 };
 
-Strategy.setBrandPromotionMoney = function(cartItems, totalPromotionMoney) {
+Strategy.prototype.setBrandPromotion = function(cartItems) {
     _.forEach(cartItems, function(cartItem) {
-        cartItem.promotionMoney = totalPromotionMoney / cartItems.length;
+        cartItem.isPromotion = true;
     });
 };
 

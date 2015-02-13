@@ -14,9 +14,9 @@ StrategyOne.prototype.constructor = StrategyOne;
 StrategyOne.prototype.getPromotionInfo = function(cartItems) {
     var promotionInfo = '';
 
-    promotionInfo += StrategyOne.getItemDiscountInfo(cartItems);
-    promotionInfo += StrategyOne.getBrandDiscountInfo(cartItems);
-    promotionInfo += StrategyOne.getWholeReductionInfo(cartItems);
+    promotionInfo += this.getItemDiscountInfo(cartItems);
+    promotionInfo += this.getBrandDiscountInfo(cartItems);
+    promotionInfo += this.getWholeReductionInfo(cartItems);
 
     return promotionInfo;
 };
@@ -29,76 +29,80 @@ StrategyOne.brands =function() {
     return [new DiscountHouse('可口可乐', 0.9)];
 };
 
-StrategyOne.getWholeReductionInfo = function(cartItems) {
+StrategyOne.prototype.getWholeReductionInfo = function(cartItems) {
     var result = '';
 
-    var newCartItems = StrategyOne.findWholeReductionCartItem(cartItems, '康师傅方便面');
-    var totalMoney = Strategy.getNoPromotionSubtotal(newCartItems);
+    var newCartItems = this.findWholeReductionCartItem(cartItems, '康师傅方便面');
+    var totalMoney = this.getNoPromotionSubtotal(newCartItems);
     var wholeReduction = new WholeReduction(100, 3, totalMoney);
 
     if(wholeReduction.getPromotionMoney() !==0) {
-        result = Strategy.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
+        this.savingTotal += wholeReduction.getPromotionMoney();
+        result = this.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
     }
 
     return result;
 };
 
-StrategyOne.findWholeReductionCartItem = function(cartItems, name) {
+StrategyOne.prototype.findWholeReductionCartItem = function(cartItems, name) {
     return _.filter(cartItems, function(cartItem) {
-        return cartItem.getName() !== name && cartItem.promotionMoney === 0;
+        return cartItem.getName() !== name && !cartItem.isPromotion;
     });
 };
 
-StrategyOne.getBrandDiscountInfo = function(cartItems) {
+StrategyOne.prototype.getBrandDiscountInfo = function(cartItems) {
+    var _this = this;
     var discountInfo = '';
-    var discountBrands = Strategy.findDiscountBrands(cartItems, StrategyOne.brands());
+    var discountBrands = this.findDiscountBrands(cartItems, StrategyOne.brands());
     _.forEach(discountBrands, function(discountBrand) {
-        discountInfo += StrategyOne.buildBrandDiscountInfo(cartItems, discountBrand);
+        discountInfo += _this.buildBrandDiscountInfo(cartItems, discountBrand);
     });
     return discountInfo;
 };
 
-StrategyOne.buildBrandDiscountInfo = function(cartItems, discountBrand) {
+StrategyOne.prototype.buildBrandDiscountInfo = function(cartItems, discountBrand) {
 
     var newCartItems = _.filter(cartItems, function(cartItem) {
         return cartItem.getBrand() === discountBrand.name;
     });
 
-    var totalMoney = Strategy.getNoPromotionSubtotal(newCartItems);
+    var totalMoney = this.getNoPromotionSubtotal(newCartItems);
 
     var brandDiscount = new BrandDiscount(discountBrand.rate, totalMoney, discountBrand.name);
-    Strategy.setBrandPromotionMoney(newCartItems, brandDiscount.getPromotionMoney());
+    this.setBrandPromotion(newCartItems);
+    this.savingTotal += brandDiscount.getPromotionMoney();
 
-    return Strategy.buildInfo(brandDiscount.buildPromotionName(), brandDiscount.getPromotionMoney());
+    return this.buildInfo(brandDiscount.buildPromotionName(), brandDiscount.getPromotionMoney());
 };
 
-StrategyOne.getItemDiscountInfo = function(cartItems) {
+StrategyOne.prototype.getItemDiscountInfo = function(cartItems) {
+    var _this = this;
     var discountInfo = '';
-    var discountItems = Strategy.findDiscountItems(cartItems, StrategyOne.items());
+    var discountItems = this.findDiscountItems(cartItems, StrategyOne.items());
     _.forEach(discountItems, function(discountItem) {
-        discountInfo += StrategyOne.buildItemDiscountInfo(cartItems, discountItem);
+        discountInfo += _this.buildItemDiscountInfo(cartItems, discountItem);
     });
 
     return discountInfo;
 };
 
-StrategyOne.buildItemDiscountInfo = function(cartItems, discountItem) {
+StrategyOne.prototype.buildItemDiscountInfo = function(cartItems, discountItem) {
     var result = '';
-
     var cartItem = _.find(cartItems, function(cartItem) {
         return cartItem.getName() === discountItem.name;
     });
 
-    if(!StrategyOne.isSyndrome(cartItem, StrategyOne.brands())) {
+    if(!this.isSyndrome(cartItem, StrategyOne.brands())) {
         var itemDiscount = new ItemDiscount(discountItem.rate, cartItem.getSubtotal(), discountItem.name);
-        cartItem.promotionMoney = itemDiscount.getPromotionMoney();
-        result += Strategy.buildInfo(itemDiscount.buildPromotionName(), itemDiscount.getPromotionMoney());
+        cartItem.isPromotion = true;
+        this.savingTotal += itemDiscount.getPromotionMoney();
+        result += this.buildInfo(itemDiscount.buildPromotionName(), itemDiscount.getPromotionMoney());
     }
 
     return result;
 };
 
-StrategyOne.isSyndrome = function(cartItem, brandItems) {
+StrategyOne.prototype.isSyndrome = function(cartItem, brandItems) {
     return _.any(brandItems, function(brandItem) {
         return brandItem.name === cartItem.getBrand();
     });
