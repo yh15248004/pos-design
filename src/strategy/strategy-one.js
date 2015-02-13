@@ -6,6 +6,7 @@ var BrandDiscount = require('../promotion/brand-discount');
 var WholeReduction = require('../promotion/whole-reduction');
 
 function StrategyOne() {
+    this.savingTotal = 0;
 }
 StrategyOne.prototype = Object.create(Strategy.prototype);
 StrategyOne.prototype.constructor = StrategyOne;

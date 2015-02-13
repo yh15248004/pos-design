@@ -1,6 +1,7 @@
 var _ = require('lodash');
 
 function Strategy() {
+    this.savingTotal = 0;
 }
 
 Strategy.buildInfo = function(name, money) {
