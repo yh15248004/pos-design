@@ -19,6 +19,7 @@ StrategyTwo.prototype.getPromotionInfo = function(cartItems) {
     promotionInfo += this.getItemDiscountInfo(cartItems);
     promotionInfo += this.getBrandDiscountInfo(cartItems);
     promotionInfo += this.getBrandReductionInfo(cartItems);
+    promotionInfo += this.getItemReductionInfo(cartItems);
 
     return promotionInfo;
 };
@@ -48,6 +49,22 @@ StrategyTwo.prototype.getItemReductionInfo = function(cartItems) {
     });
 
     return reductionInfo;
+};
+
+StrategyTwo.prototype.buildItemReductionInfo = function(cartItems, reductionItem) {
+    var result = '';
+    var cartItem = _.find(cartItems, function(cartItem) {
+        return cartItem.getName() === reductionItem.name;
+    });
+
+    var itemReduction = new ItemReduction(reductionItem.reachPoint, reductionItem.reduceMoney, cartItem.getSubtotal(), reductionItem.name);
+    cartItem.isPromotion = true;
+    this.savingTotal += itemReduction.getPromotionMoney();
+    if(itemReduction.getPromotionMoney() !== 0) {
+        result += this.buildInfo(itemReduction.buildPromotionName(), itemReduction.getPromotionMoney());
+    }
+
+    return result;
 };
 
 StrategyTwo.prototype.getBrandReductionInfo = function(cartItems) {
