@@ -53,7 +53,7 @@ StrategyOne.prototype.findWholeReductionCartItem = function(cartItems, name) {
 StrategyOne.prototype.getBrandDiscountInfo = function(cartItems) {
     var _this = this;
     var discountInfo = '';
-    var discountBrands = this.findDiscountBrands(cartItems, StrategyOne.brands());
+    var discountBrands = this.findBrands(cartItems, StrategyOne.brands());
     _.forEach(discountBrands, function(discountBrand) {
         discountInfo += _this.buildBrandDiscountInfo(cartItems, discountBrand);
     });
@@ -78,7 +78,7 @@ StrategyOne.prototype.buildBrandDiscountInfo = function(cartItems, discountBrand
 StrategyOne.prototype.getItemDiscountInfo = function(cartItems) {
     var _this = this;
     var discountInfo = '';
-    var discountItems = this.findDiscountItems(cartItems, StrategyOne.items());
+    var discountItems = this.findItems(cartItems, StrategyOne.items());
     _.forEach(discountItems, function(discountItem) {
         discountInfo += _this.buildItemDiscountInfo(cartItems, discountItem);
     });

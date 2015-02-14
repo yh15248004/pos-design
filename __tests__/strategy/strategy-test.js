@@ -17,33 +17,33 @@ describe('Strategy', function() {
 
     });
 
-    describe('.findDiscountItems()', function() {
+    describe('.findItems()', function() {
         var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
             new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
 
         it('should return correct string', function() {
-            var result = strategy.findDiscountItems(cartItems, StrategyOne.items());
+            var result = strategy.findItems(cartItems, StrategyOne.items());
             expect(result[0].name).toBe('可口可乐350ml');
         });
 
         it('should return correct num', function() {
-            var result = strategy.findDiscountItems(cartItems, StrategyOne.items());
+            var result = strategy.findItems(cartItems, StrategyOne.items());
             expect(result[0].rate).toBe(0.95);
         });
 
     });
 
-    describe('.findDiscountBrands()', function() {
+    describe('.findBrands()', function() {
         var cartItems = [new CartItem(new Item('ITEM000000', '可口可乐350ml', '瓶', 3.00, '可口可乐'), 20),
             new CartItem(new Item('ITEM000010', '可口可乐550ml', '瓶', 4.00, '可口可乐'), 12)];
 
         it('should return correct string', function() {
-            var result = strategy.findDiscountBrands(cartItems, StrategyOne.brands());
+            var result = strategy.findBrands(cartItems, StrategyOne.brands());
             expect(result[0].name).toBe('可口可乐');
         });
 
         it('should return correct num', function() {
-            var result = strategy.findDiscountBrands(cartItems, StrategyOne.brands());
+            var result = strategy.findBrands(cartItems, StrategyOne.brands());
             expect(result[0].rate).toBe(0.9);
         });
 

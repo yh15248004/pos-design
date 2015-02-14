@@ -8,25 +8,25 @@ Strategy.prototype.buildInfo = function(name, money) {
     return '名称：' + name + '，金额：' + money.toFixed(2) + '元\n';
 };
 
-Strategy.prototype.findDiscountItems = function(cartItems, discountItems) {
+Strategy.prototype.findItems = function(cartItems, items) {
     var result = [];
 
     _.forEach(cartItems, function(cartItem){
-        var discountItem = _.find(discountItems, function(discountItem){
-            return discountItem.name === cartItem.getName();});
-        if(!!discountItem) {result.push(discountItem);}
+        var item = _.find(items, function(item){
+            return item.name === cartItem.getName();});
+        if(!!item) {result.push(item);}
     });
 
     return result;
 };
 
-Strategy.prototype.findDiscountBrands = function(cartItems, discountBrands) {
+Strategy.prototype.findBrands = function(cartItems, brands) {
     var result = [];
 
     _.forEach(cartItems, function(cartItem){
-        var discountBrand = _.find(discountBrands, function(discountBrand){
-            return discountBrand.name === cartItem.getBrand();});
-        if(!!discountBrand) {result.push(discountBrand);}
+        var brand = _.find(brands, function(brand){
+            return brand.name === cartItem.getBrand();});
+        if(!!brand) {result.push(brand);}
     });
 
     result = _.intersection(result);

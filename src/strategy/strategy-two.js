@@ -40,7 +40,7 @@ StrategyTwo.prototype.getBrandReductionInfo = function(cartItems) {
 
     var _this = this;
     var reductionInfo = '';
-    var reductionBrands = this.findReductionBrands(cartItems, StrategyTwo.reductionBrands());
+    var reductionBrands = this.findBrands(cartItems, StrategyTwo.reductionBrands());
     _.forEach(reductionBrands, function(reductionBrand) {
         reductionInfo += _this.buildBrandReductionInfo(cartItems, reductionBrand);
     });
@@ -51,7 +51,7 @@ StrategyTwo.prototype.getBrandReductionInfo = function(cartItems) {
 StrategyTwo.prototype.getBrandDiscountInfo = function(cartItems) {
     var _this = this;
     var discountInfo = '';
-    var discountBrands = this.findDiscountBrands(cartItems, StrategyTwo.brands());
+    var discountBrands = this.findBrands(cartItems, StrategyTwo.brands());
     _.forEach(discountBrands, function(discountBrand) {
         discountInfo += _this.buildBrandDiscountInfo(cartItems, discountBrand);
     });
@@ -77,7 +77,7 @@ StrategyTwo.prototype.buildBrandDiscountInfo = function(cartItems, discountBrand
 StrategyTwo.prototype.getItemDiscountInfo = function(cartItems) {
     var _this = this;
     var discountInfo = '';
-    var discountItems = this.findDiscountItems(cartItems, StrategyTwo.items());
+    var discountItems = this.findItems(cartItems, StrategyTwo.items());
     _.forEach(discountItems, function(discountItem) {
         discountInfo += _this.buildItemDiscountInfo(cartItems, discountItem);
     });
