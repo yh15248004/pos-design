@@ -19,6 +19,7 @@ StrategyTwo.prototype.getPromotionInfo = function(cartItems) {
     promotionInfo += this.getItemDiscountInfo(cartItems);
     promotionInfo += this.getBrandDiscountInfo(cartItems);
     promotionInfo += this.getBrandReductionInfo(cartItems);
+
     return promotionInfo;
 };
 
@@ -38,6 +39,17 @@ StrategyTwo.reductionBrands =function() {
     return [new ReductionHouse('康师傅', 100, 2)];
 };
 
+StrategyTwo.prototype.getItemReductionInfo = function(cartItems) {
+    var _this = this;
+    var reductionInfo = '';
+    var reductionItems = this.findItems(cartItems, StrategyTwo.reductionItems());
+    _.forEach(reductionItems, function(reductionItem) {
+        reductionInfo += _this.buildItemReductionInfo(cartItems, reductionItem);
+    });
+
+    return reductionInfo;
+};
+
 StrategyTwo.prototype.getBrandReductionInfo = function(cartItems) {
 
     var _this = this;
@@ -51,6 +63,8 @@ StrategyTwo.prototype.getBrandReductionInfo = function(cartItems) {
 };
 
 StrategyTwo.prototype.buildBrandReductionInfo = function(cartItems, reductionBrand) {
+    var result = '';
+
     var newCartItems = _.filter(cartItems, function(cartItem) {
         return cartItem.getBrand() === reductionBrand.name;
     });
@@ -60,8 +74,10 @@ StrategyTwo.prototype.buildBrandReductionInfo = function(cartItems, reductionBra
     var brandReduction = new BrandReduction(reductionBrand.reachPoint, reductionBrand.reduceMoney, totalMoney, reductionBrand.name);
     this.setBrandPromotion(newCartItems);
     this.savingTotal += brandReduction.getPromotionMoney();
-
-    return this.buildInfo(brandReduction.buildPromotionName(), brandReduction.getPromotionMoney());
+    if(brandReduction.getPromotionMoney().toFixed(0) !== '0') {
+        result = this.buildInfo(brandReduction.buildPromotionName(), brandReduction.getPromotionMoney());
+    }
+    return result;
 };
 
 StrategyTwo.prototype.getBrandDiscountInfo = function(cartItems) {
