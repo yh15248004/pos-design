@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var Strategy = require('./strategy');
 var DiscountHouse = require('../promotion/discount-house');
+var ReductionHouse = require('../promotion/reduction-house');
 var ItemDiscount = require('../promotion/item-discount');
 var BrandDiscount = require('../promotion/brand-discount');
 
@@ -25,6 +26,26 @@ StrategyTwo.items =function() {
 
 StrategyTwo.brands =function() {
     return [new DiscountHouse('可口可乐', 0.9)];
+};
+
+StrategyTwo.reductionItems =function() {
+    return [new ReductionHouse('云山荔枝', 100, 5)];
+};
+
+StrategyTwo.reductionBrands =function() {
+    return [new ReductionHouse('康师傅', 100, 2)];
+};
+
+StrategyTwo.prototype.getBrandReductionInfo = function(cartItems) {
+
+    var _this = this;
+    var reductionInfo = '';
+    var reductionBrands = this.findReductionBrands(cartItems, StrategyTwo.reductionBrands());
+    _.forEach(reductionBrands, function(reductionBrand) {
+        reductionInfo += _this.buildBrandReductionInfo(cartItems, reductionBrand);
+    });
+
+    return reductionInfo;
 };
 
 StrategyTwo.prototype.getBrandDiscountInfo = function(cartItems) {
