@@ -12,7 +12,9 @@ StrategyTwo.prototype.constructor = StrategyTwo;
 
 StrategyTwo.prototype.getPromotionInfo = function(cartItems) {
     var promotionInfo = '';
+
     promotionInfo += this.getItemDiscountInfo(cartItems);
+    promotionInfo += this.getBrandDiscountInfo(cartItems);
 
     return promotionInfo;
 };
@@ -24,6 +26,32 @@ StrategyTwo.items =function() {
 StrategyTwo.brands =function() {
     return [new DiscountHouse('可口可乐', 0.9)];
 };
+
+StrategyTwo.prototype.getBrandDiscountInfo = function(cartItems) {
+    var _this = this;
+    var discountInfo = '';
+    var discountBrands = this.findDiscountBrands(cartItems, StrategyTwo.brands());
+    _.forEach(discountBrands, function(discountBrand) {
+        discountInfo += _this.buildBrandDiscountInfo(cartItems, discountBrand);
+    });
+    return discountInfo;
+};
+
+StrategyTwo.prototype.buildBrandDiscountInfo = function(cartItems, discountBrand) {
+
+    var newCartItems = _.filter(cartItems, function(cartItem) {
+        return cartItem.getBrand() === discountBrand.name && !cartItem.isPromotion;
+    });
+
+    var totalMoney = this.getNoPromotionSubtotal(newCartItems);
+
+    var brandDiscount = new BrandDiscount(discountBrand.rate, totalMoney, discountBrand.name);
+    this.setBrandPromotion(newCartItems);
+    this.savingTotal += brandDiscount.getPromotionMoney();
+
+    return this.buildInfo(brandDiscount.buildPromotionName(), brandDiscount.getPromotionMoney());
+};
+
 
 StrategyTwo.prototype.getItemDiscountInfo = function(cartItems) {
     var _this = this;
