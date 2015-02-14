@@ -15,8 +15,8 @@ describe('ItemFactory', function() {
                           { 'ITEM000010' : 2 }];
 
         it('should return correct count', function() {
-            var result = ItemFactory.createCartItems(cart, countItems);
-            expect(result[0].count).toEqual(20);
+            ItemFactory.createCartItems(cart, countItems);
+            expect(cart.cartItems[0].count).toEqual(20);
         });
 
     });

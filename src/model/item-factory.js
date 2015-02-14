@@ -10,7 +10,6 @@ ItemFactory.createCartItems = function(cart, countItems) {
         cart.addCartItem(countItem);
     });
 
-    return cart.cartItems;
 };
 
 module.exports = ItemFactory;
