@@ -15,7 +15,8 @@ describe('StrategyTwo', function() {
             new CartItem(new Item('ITEM000006', '羽毛球', '个', 1.00, ''), 20)];
         it('should return correct string', function() {
             var result = strategyTwo.getPromotionInfo(cartItems);
-            expect(result).toBe('名称：可口可乐350ml单品打折，金额：15.00元\n');
+            expect(result).toBe('名称：可口可乐350ml单品打折，金额：15.00元\n' +
+            '名称：可口可乐品牌打折，金额：4.80元\n');
         });
 
     });
