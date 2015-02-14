@@ -6,4 +6,10 @@ function StrategyTwo() {
 StrategyTwo.prototype = Object.create(Strategy.prototype);
 StrategyTwo.prototype.constructor = StrategyTwo;
 
+StrategyOne.prototype.getPromotionInfo = function(cartItems) {
+    var promotionInfo = '';
+
+    return promotionInfo;
+};
+
 module.exports = StrategyTwo;
