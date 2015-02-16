@@ -20,7 +20,7 @@ StrategyFour.prototype.getPromotionInfo = function(cartItems) {
     promotionInfo += this.getItemDiscountInfo(cartItems);
     promotionInfo += this.getBrandDiscountInfo(cartItems);
     promotionInfo += this.getItemReductionInfo(cartItems);
-    //promotionInfo += this.getBrandReductionInfo(cartItems);
+    promotionInfo += this.getBrandReductionInfo(cartItems);
     //promotionInfo += this.getWholeDiscountInfo(cartItems);
 
     return promotionInfo;
@@ -36,6 +36,40 @@ StrategyFour.brands = function() {
 
 StrategyFour.reductionItems = function() {
     return [new ReductionHouse('果粒橙', 100, 5)];
+};
+
+StrategyFour.reductionBrands =function() {
+    return [new ReductionHouse('云山', 100, 2)];
+};
+
+StrategyFour.prototype.getBrandReductionInfo = function(cartItems) {
+
+    var _this = this;
+    var reductionInfo = '';
+    var reductionBrands = this.findBrands(cartItems, StrategyFour.reductionBrands());
+    _.forEach(reductionBrands, function(reductionBrand) {
+        reductionInfo += _this.buildBrandReductionInfo(cartItems, reductionBrand);
+    });
+
+    return reductionInfo;
+};
+
+StrategyFour.prototype.buildBrandReductionInfo = function(cartItems, reductionBrand) {
+    var result = '';
+
+    var newCartItems = _.filter(cartItems, function(cartItem) {
+        return cartItem.getBrand() === reductionBrand.name;
+    });
+
+    var totalMoney = this.getNoPromotionSubtotal(newCartItems);
+
+    var brandReduction = new BrandReduction(reductionBrand.reachPoint, reductionBrand.reduceMoney, totalMoney, reductionBrand.name);
+    this.setBrandPromotion(newCartItems);
+    this.savingTotal += brandReduction.getPromotionMoney();
+    if(brandReduction.getPromotionMoney().toFixed(0) !== '0') {
+        result = this.buildInfo(brandReduction.buildPromotionName(), brandReduction.getPromotionMoney());
+    }
+    return result;
 };
 
 StrategyFour.prototype.getItemReductionInfo = function(cartItems) {
