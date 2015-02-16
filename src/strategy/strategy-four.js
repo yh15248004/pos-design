@@ -6,7 +6,7 @@ var ItemDiscount = require('../promotion/item-discount');
 var BrandDiscount = require('../promotion/brand-discount');
 var ItemReduction = require('../promotion/item-reduction');
 var BrandReduction = require('../promotion/brand-reduction');
-var WholeReduction = require('../promotion/whole-reduction');
+var WholeDiscount = require('../promotion/whole-discount');
 
 function StrategyFour() {
     this.savingTotal = 0;
@@ -49,19 +49,19 @@ StrategyFour.reductionBrands =function() {
 StrategyFour.prototype.getWholeDiscountInfo = function(cartItems) {
     var result = '';
 
-    var newCartItems = this.findWholeDiscountCartItem(cartItems, '雪碧');
+    var newCartItems = this.findWholeDiscountCartItems(cartItems, '雪碧');
     var totalMoney = this.getNoPromotionSubtotal(newCartItems) - this.savingTotal;
-    var wholeReduction = new WholeReduction(StrategyThree.wholeReduction().reachPoint, StrategyThree.wholeReduction().reduceMoney, totalMoney);
+    var wholeDiscount = new WholeDiscount(StrategyFour.whole().rate, totalMoney);
 
-    if(wholeReduction.getPromotionMoney() !== 0) {
-        this.savingTotal += wholeReduction.getPromotionMoney();
-        result = this.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
+    if(wholeDiscount.getPromotionMoney() !== 0) {
+        this.savingTotal += wholeDiscount.getPromotionMoney();
+        result = this.buildInfo(wholeDiscount.buildPromotionName(), wholeDiscount.getPromotionMoney());
     }
 
     return result;
 };
 
-StrategyFour.prototype.findWholeDiscountCartItem = function(cartItems, name) {
+StrategyFour.prototype.findWholeDiscountCartItems = function(cartItems, name) {
     return _.filter(cartItems, function(cartItem) {
         return cartItem.getName() !== name;
     });
