@@ -19,19 +19,50 @@ StrategyFour.prototype.getPromotionInfo = function(cartItems) {
 
     promotionInfo += this.getItemDiscountInfo(cartItems);
     promotionInfo += this.getBrandDiscountInfo(cartItems);
-    //promotionInfo += this.getItemReductionInfo(cartItems);
+    promotionInfo += this.getItemReductionInfo(cartItems);
     //promotionInfo += this.getBrandReductionInfo(cartItems);
     //promotionInfo += this.getWholeDiscountInfo(cartItems);
 
     return promotionInfo;
 };
 
-StrategyFour.items =function() {
+StrategyFour.items = function() {
     return [new DiscountHouse('可口可乐350ml', 0.95)];
 };
 
-StrategyFour.brands =function() {
+StrategyFour.brands = function() {
     return [new DiscountHouse('可口可乐', 0.9)];
+};
+
+StrategyFour.reductionItems = function() {
+    return [new ReductionHouse('果粒橙', 100, 5)];
+};
+
+StrategyFour.prototype.getItemReductionInfo = function(cartItems) {
+    var _this = this;
+    var reductionInfo = '';
+    var reductionItems = this.findItems(cartItems, StrategyFour.reductionItems());
+    _.forEach(reductionItems, function(reductionItem) {
+        reductionInfo += _this.buildItemReductionInfo(cartItems, reductionItem);
+    });
+
+    return reductionInfo;
+};
+
+StrategyFour.prototype.buildItemReductionInfo = function(cartItems, reductionItem) {
+    var result = '';
+    var cartItem = _.find(cartItems, function(cartItem) {
+        return cartItem.getName() === reductionItem.name;
+    });
+
+    var itemReduction = new ItemReduction(reductionItem.reachPoint, reductionItem.reduceMoney, cartItem.getSubtotal(), reductionItem.name);
+    cartItem.isPromotion = true;
+    this.savingTotal += itemReduction.getPromotionMoney();
+    if(itemReduction.getPromotionMoney() !== 0) {
+        result += this.buildInfo(itemReduction.buildPromotionName(), itemReduction.getPromotionMoney());
+    }
+
+    return result;
 };
 
 StrategyFour.prototype.getBrandDiscountInfo = function(cartItems) {
