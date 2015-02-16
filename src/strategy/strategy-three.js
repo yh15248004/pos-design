@@ -6,6 +6,8 @@ var ItemDiscount = require('../promotion/item-discount');
 var BrandDiscount = require('../promotion/brand-discount');
 var ItemReduction = require('../promotion/item-reduction');
 var BrandReduction = require('../promotion/brand-reduction');
+var WholeReduction = require('../promotion/whole-reduction');
+
 function StrategyThree() {
     this.savingTotal =0;
 }
@@ -18,7 +20,7 @@ StrategyThree.prototype.getPromotionInfo = function(cartItems) {
     promotionInfo += this.getItemDiscountInfo(cartItems);
     promotionInfo += this.getBrandDiscountInfo(cartItems);
     promotionInfo += this.getBrandReductionInfo(cartItems);
-    //promotionInfo += this.getWholeReductionInfo(cartItems);
+    promotionInfo += this.getWholeReductionInfo(cartItems);
 
     return promotionInfo;
 };
@@ -33,6 +35,31 @@ StrategyThree.brands =function() {
 
 StrategyThree.reductionBrands =function() {
     return [new ReductionHouse('康师傅', 100, 2)];
+};
+
+StrategyThree.wholeReduction = function() {
+    return new ReductionHouse('', 100, 5);
+};
+
+StrategyThree.prototype.getWholeReductionInfo = function(cartItems) {
+    var result = '';
+
+    var newCartItems = this.findWholeReductionCartItem(cartItems, '云山苹果');
+    var totalMoney = this.getNoPromotionSubtotal(newCartItems) - this.savingTotal;
+    var wholeReduction = new WholeReduction(StrategyThree.wholeReduction().reachPoint, StrategyThree.wholeReduction().reduceMoney, totalMoney);
+
+    if(wholeReduction.getPromotionMoney() !== 0) {
+        this.savingTotal += wholeReduction.getPromotionMoney();
+        result = this.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
+    }
+
+    return result;
+};
+
+StrategyThree.prototype.findWholeReductionCartItem = function(cartItems, name) {
+    return _.filter(cartItems, function(cartItem) {
+        return cartItem.getName() !== name;
+    });
 };
 
 StrategyThree.prototype.getBrandReductionInfo = function(cartItems) {
