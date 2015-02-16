@@ -21,7 +21,7 @@ StrategyFour.prototype.getPromotionInfo = function(cartItems) {
     promotionInfo += this.getBrandDiscountInfo(cartItems);
     promotionInfo += this.getItemReductionInfo(cartItems);
     promotionInfo += this.getBrandReductionInfo(cartItems);
-    //promotionInfo += this.getWholeDiscountInfo(cartItems);
+    promotionInfo += this.getWholeDiscountInfo(cartItems);
 
     return promotionInfo;
 };
@@ -34,12 +34,37 @@ StrategyFour.brands = function() {
     return [new DiscountHouse('可口可乐', 0.9)];
 };
 
+StrategyFour.whole = function() {
+    return new DiscountHouse('', 0.9);
+};
+
 StrategyFour.reductionItems = function() {
     return [new ReductionHouse('果粒橙', 100, 5)];
 };
 
 StrategyFour.reductionBrands =function() {
     return [new ReductionHouse('云山', 100, 2)];
+};
+
+StrategyFour.prototype.getWholeDiscountInfo = function(cartItems) {
+    var result = '';
+
+    var newCartItems = this.findWholeDiscountCartItem(cartItems, '雪碧');
+    var totalMoney = this.getNoPromotionSubtotal(newCartItems) - this.savingTotal;
+    var wholeReduction = new WholeReduction(StrategyThree.wholeReduction().reachPoint, StrategyThree.wholeReduction().reduceMoney, totalMoney);
+
+    if(wholeReduction.getPromotionMoney() !== 0) {
+        this.savingTotal += wholeReduction.getPromotionMoney();
+        result = this.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
+    }
+
+    return result;
+};
+
+StrategyFour.prototype.findWholeDiscountCartItem = function(cartItems, name) {
+    return _.filter(cartItems, function(cartItem) {
+        return cartItem.getName() !== name;
+    });
 };
 
 StrategyFour.prototype.getBrandReductionInfo = function(cartItems) {
