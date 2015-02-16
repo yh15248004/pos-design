@@ -15,7 +15,8 @@ describe('StrategyFour', function() {
             new CartItem(new Item('ITEM000007', '云山苹果', '个', 5.00, ''), 50)];
         it('should return correct string', function() {
             var result = strategyFour.getPromotionInfo(cartItems);
-            expect(result).toBe('名称：可口可乐350ml单品打折，金额：15.00元\n');
+            expect(result).toBe('名称：可口可乐350ml单品打折，金额：15.00元\n' +
+            '名称：可口可乐品牌打折，金额：34.80元\n');
         });
 
     });
