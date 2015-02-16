@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var Strategy = require('./strategy');
 var DiscountHouse = require('../promotion/discount-house');
+var ReductionHouse = require('../promotion/reduction-house');
 var ItemDiscount = require('../promotion/item-discount');
 var BrandDiscount = require('../promotion/brand-discount');
 var WholeReduction = require('../promotion/whole-reduction');
@@ -29,14 +30,18 @@ StrategyOne.brands =function() {
     return [new DiscountHouse('可口可乐', 0.9)];
 };
 
+StrategyOne.wholeReduction = function() {
+    return new ReductionHouse('', 100, 3);
+};
+
 StrategyOne.prototype.getWholeReductionInfo = function(cartItems) {
     var result = '';
 
     var newCartItems = this.findWholeReductionCartItem(cartItems, '康师傅方便面');
     var totalMoney = this.getNoPromotionSubtotal(newCartItems);
-    var wholeReduction = new WholeReduction(100, 3, totalMoney);
+    var wholeReduction = new WholeReduction(StrategyOne.wholeReduction().reachPoint, StrategyOne.wholeReduction().reduceMoney, totalMoney);
 
-    if(wholeReduction.getPromotionMoney() !==0) {
+    if(wholeReduction.getPromotionMoney() !== 0) {
         this.savingTotal += wholeReduction.getPromotionMoney();
         result = this.buildInfo(wholeReduction.buildPromotionName(), wholeReduction.getPromotionMoney());
     }
