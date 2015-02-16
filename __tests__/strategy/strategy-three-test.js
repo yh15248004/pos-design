@@ -17,7 +17,8 @@ describe('StrategyThree', function() {
         it('should return correct string', function() {
             var result = strategyThree.getPromotionInfo(cartItems);
             expect(result).toBe('名称：可口可乐350ml单品打折，金额：15.00元\n' +
-            '名称：可口可乐品牌打折，金额：33.30元\n');
+            '名称：可口可乐品牌打折，金额：33.30元\n' +
+            '名称：康师傅品牌满100减2，金额：4.00元\n');
         });
 
     });
