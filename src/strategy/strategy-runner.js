@@ -10,14 +10,19 @@ function StrategyRunner() {
 StrategyRunner.getStrategy = function(strategyType) {
     var result = new NoStrategy();
 
-    if(strategyType === 1) {
-        result = new StrategyOne();
-    } else if(strategyType === 2) {
-        result = new StrategyTwo();
-    } else if(strategyType === 3) {
-        result = new StrategyThree();
-    } else if(strategyType === 4) {
-        result = new StrategyFour();
+    switch (strategyType) {
+        case 1 :
+            result = new StrategyOne();
+            break;
+        case 2 :
+            result = new StrategyTwo();
+            break;
+        case 3 :
+            result = new StrategyThree();
+            break;
+        case 4 :
+            result = new StrategyFour();
+            break;
     }
 
     return result;
