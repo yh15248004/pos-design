@@ -8,7 +8,7 @@ var ItemReduction = require('../promotion/item-reduction');
 var BrandReduction = require('../promotion/brand-reduction');
 
 function StrategyTwo() {
-    this.savingTotal = 0;
+    Strategy.call(this);
 }
 StrategyTwo.prototype = Object.create(Strategy.prototype);
 StrategyTwo.prototype.constructor = StrategyTwo;

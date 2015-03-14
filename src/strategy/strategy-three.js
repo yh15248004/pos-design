@@ -9,7 +9,7 @@ var BrandReduction = require('../promotion/brand-reduction');
 var WholeReduction = require('../promotion/whole-reduction');
 
 function StrategyThree() {
-    this.savingTotal =0;
+    Strategy.call(this);
 }
 StrategyThree.prototype = Object.create(Strategy.prototype);
 StrategyThree.prototype.constructor = StrategyThree;

@@ -1,7 +1,7 @@
 var Strategy = require('./strategy');
 
 function NoStrategy() {
-    this.savingTotal = 0;
+    Strategy.call(this);
 }
 
 NoStrategy.prototype = Object.create(Strategy.prototype);
