@@ -1,7 +1,7 @@
 jest.autoMockOff();
 
 describe('StrategyRunner', function() {
-    var StrategyRunner = require('../../src/strategy/strategy-runner');
+    var StrategyRunner = require('../../../src/model/strategy/strategy-runner');
     /*describe('.getStrategy()', function() {
 
         it('should return correct strategy', function() {

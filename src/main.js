@@ -1,4 +1,4 @@
-var StrategyRunner = require('./strategy/strategy-runner');
+var StrategyRunner = require('./model/strategy/strategy-runner');
 var Cart = require('./model/cart');
 var ItemFactory = require('./model/item-factory');
 var Inventory = require('./model/inventory');
@@ -13,7 +13,7 @@ var Inventory = require('./model/inventory');
         { 'ITEM000003' : 8  },
         { 'ITEM000002' : 14 }
     ];
-    var strategyType = 4;
+    var strategyType = 2;
     var strategy = StrategyRunner.getStrategy(strategyType);
     var cart = new Cart();
     ItemFactory.createCartItems(cart, countItems);

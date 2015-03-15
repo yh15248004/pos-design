@@ -1,9 +1,9 @@
-jest.dontMock('../../src/promotion/item-discount');
-jest.dontMock('../../src/promotion/discount');
+jest.dontMock('../../../src/model/promotion/item-discount');
+jest.dontMock('../../../src/model/promotion/discount');
 
 describe('ItemDiscount', function() {
 
-    var ItemDiscount = require('../../src/promotion/item-discount');
+    var ItemDiscount = require('../../../src/model/promotion/item-discount');
     var discount = new ItemDiscount(0.95, 50.9, '苹果');
 
     describe('#buildPromotionName()', function() {

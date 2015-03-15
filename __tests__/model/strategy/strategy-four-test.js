@@ -2,9 +2,9 @@ jest.autoMockOff();
 
 describe('StrategyFour', function() {
 
-    var StrategyFour = require('../../src/strategy/strategy-four');
-    var Item = require('../../src/model/item');
-    var CartItem = require('../../src/model/cart-item');
+    var StrategyFour = require('../../../src/model/strategy/strategy-four');
+    var Item = require('../../../src/model/item');
+    var CartItem = require('../../../src/model/cart-item');
     var strategyFour = new StrategyFour;
 
     describe('.getPromotionInfo()', function() {

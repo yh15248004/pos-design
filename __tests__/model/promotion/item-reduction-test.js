@@ -1,15 +1,15 @@
-jest.dontMock('../../src/promotion/reduction');
-jest.dontMock('../../src/promotion/whole-reduction');
+jest.dontMock('../../../src/model/promotion/reduction');
+jest.dontMock('../../../src/model/promotion/item-reduction');
 
-describe('WholeReduction', function() {
+describe('ItemReduction', function() {
 
-    var WholeReduction = require('../../src/promotion/whole-reduction');
-    var reduction = new WholeReduction(100, 5, 599);
+    var ItemReduction = require('../../../src/model/promotion/item-reduction');
+    var reduction = new ItemReduction(100, 5, 599, '可口可乐');
 
     describe('#buildPromotionName()', function() {
         it('should return correct string', function() {
             var result = reduction.buildPromotionName();
-            expect(result).toBe('满100减5');
+            expect(result).toBe('可口可乐满100减5');
         });
     });
 

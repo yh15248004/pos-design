@@ -1,9 +1,9 @@
-jest.dontMock('../../src/promotion/whole-discount');
-jest.dontMock('../../src/promotion/discount');
+jest.dontMock('../../../src/model/promotion/whole-discount');
+jest.dontMock('../../../src/model/promotion/discount');
 
 describe('WholeDiscount', function() {
 
-    var WholeDiscount = require('../../src/promotion/whole-discount');
+    var WholeDiscount = require('../../../src/model/promotion/whole-discount');
     var discount = new WholeDiscount(0.9, 50.9);
 
     describe('#buildPromotionName()', function() {

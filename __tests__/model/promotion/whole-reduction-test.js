@@ -1,14 +1,15 @@
-jest.dontMock('../../src/promotion/reduction');
+jest.dontMock('../../../src/model/promotion/reduction');
+jest.dontMock('../../../src/model/promotion/whole-reduction');
 
-describe('Reduction', function() {
+describe('WholeReduction', function() {
 
-    var Reduction = require('../../src/promotion/reduction');
-    var reduction = new Reduction(100, 5, 599);
+    var WholeReduction = require('../../../src/model/promotion/whole-reduction');
+    var reduction = new WholeReduction(100, 5, 599);
 
     describe('#buildPromotionName()', function() {
         it('should return correct string', function() {
             var result = reduction.buildPromotionName();
-            expect(result).toBe('');
+            expect(result).toBe('满100减5');
         });
     });
 

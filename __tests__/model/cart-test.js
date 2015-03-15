@@ -4,7 +4,7 @@ describe('Cart', function() {
     var CartItem = require('../../src/model/cart-item');
     var Cart = require('../../src/model/cart');
     var Item = require('../../src/model/item');
-    var StrategyOne = require('../../src/strategy/strategy-one');
+    var StrategyOne = require('../../src/model/strategy/strategy-one');
     var cart;
     var cartItems;
 

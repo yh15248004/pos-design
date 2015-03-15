@@ -4,7 +4,7 @@ var moment = require('moment');
 describe('Inventory', function() {
     var Inventory = require('../../src/model/inventory');
     var Cart = require('../../src/model/cart');
-    var StrategyOne = require('../../src/strategy/strategy-one');
+    var StrategyOne = require('../../src/model/strategy/strategy-one');
     var CartItem = require('../../src/model/cart-item');
     var Item = require('../../src/model/item');
     var cart = new Cart();
