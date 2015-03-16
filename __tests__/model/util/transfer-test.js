@@ -9,8 +9,8 @@ describe('Transfer', function() {
             var result = Transfer.transToHanzi(99);
             expect(result).toBe('九九');
 
-            var jsonString = fs.readFile();
-            console.log(JSON.parse(jsonString).name);
+            //var jsonString = fs.readFile();
+            //console.log(JSON.parse(jsonString).name);
         });
     });
 
