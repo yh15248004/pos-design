@@ -4,6 +4,7 @@ function Transfer() {
 Transfer.transToHanzi = function(value) {
 
     var dictionary = {
+        0 : '',
         1 : '一',
         2 : '二',
         3 : '三',
@@ -14,12 +15,7 @@ Transfer.transToHanzi = function(value) {
         8 : '八',
         9 : '九'
     };
-    var result = dictionary[Math.floor(value / 10)];
-    if(value % 10 !== 0) {
-        result += dictionary[value % 10];
-    }
-
-    return result;
+    return dictionary[Math.floor(value / 10)] + dictionary[(value % 10)];
 };
 
 module.exports = Transfer;
