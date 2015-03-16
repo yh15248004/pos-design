@@ -1,7 +1,7 @@
 function Transfer() {
 }
 
-Transfer.prototype.transToHanzi = function(value) {
+Transfer.transToHanzi = function(value) {
 
     var dictionary = {
         1 : '一',
@@ -14,9 +14,9 @@ Transfer.prototype.transToHanzi = function(value) {
         8 : '八',
         9 : '九'
     };
-    var result = dictionary[value / 10];
+    var result = dictionary[Math.floor(value / 10)];
     if(value % 10 !== 0) {
-        result.join(dictionary[value % 10]);
+        result += dictionary[value % 10];
     }
 
     return result;
